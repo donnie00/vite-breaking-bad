@@ -1,21 +1,30 @@
 <template>
-	<div class="d-flex justify-content-between align-items-center mb-3">
-		<h3 class="bg-dark text-white p-3 rounded-pill">
-			You found {{ this.itemsCount }} characters
-		</h3>
-		<CharacterFilter />
-	</div>
-	<div class="card-container">
-		<div class="row row-cols-3 row-cols-md-4 g-4">
-			<SingleCharacter v-for="char in characterList" :character="char">
-			</SingleCharacter>
+	<div>
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<h4 class="bg-dark text-white p-3 rounded-pill">
+				You found {{ this.dataInfo.count }} characters
+			</h4>
+			<div class="pages">
+				<span>&LeftArrow;</span>
+				<span class="fw-bold px-4">1 - {{ this.dataInfo.pages }}</span>
+				<span>&RightArrow;</span>
+			</div>
+
+			<CharacterFilter />
+		</div>
+		<div class="card-container">
+			<div class="row row-cols-3 row-cols-md-4 g-4">
+				<SingleCharacter v-for="char in characterList" :character="char">
+				</SingleCharacter>
+			</div>
 		</div>
 	</div>
 </template>
 <script>
 import axios from 'axios';
-import CharacterFilter from './CharacterFilter.vue';
+import {store} from '../store.js';
 
+import CharacterFilter from './CharacterFilter.vue';
 import SingleCharacter from './SingleCharacter.vue';
 
 export default {
@@ -24,17 +33,29 @@ export default {
 	data() {
 		return {
 			characterList: [],
-			itemsCount: -1,
+			dataInfo: [],
+			store,
 		};
 	},
 
 	created() {
-		axios.get('https://rickandmortyapi.com/api/character').then((resp) => {
-			console.log(resp.data.info);
+		this.store.loading = true;
 
-			this.characterList = resp.data.results;
-			this.itemsCount = resp.data.info.count;
-		});
+		axios
+			.get('https://rickandmortyapi.com/api/character')
+			.then((resp) => {
+				this.characterList = resp.data.results;
+				this.dataInfo = resp.data.info;
+
+				setTimeout(() => {
+					this.store.loading = false;
+				}, 1000);
+			})
+
+			.catch((error) => {
+				this.store.loading = false;
+				alert('Errore nel caricamento dei dati, ricarica la pagina');
+			});
 	},
 };
 </script>
