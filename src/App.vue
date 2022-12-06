@@ -23,7 +23,6 @@ export default {
 		<TheHeader />
 		<div class="container">
 			<TheLoader v-if="store.loading"></TheLoader>
-
 			<TheMain />
 		</div>
 	</div>

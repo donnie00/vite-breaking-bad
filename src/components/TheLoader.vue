@@ -1,6 +1,6 @@
 <template>
 	<div class="loader text-center text-light">
-		<h2 class="fw-bold">Sto estraendo i personaggi...</h2>
+		<h2 class="fw-bold">Sto recuperando i personaggi...</h2>
 		<img src="/rick-and-morty-icon.png" alt="" />
 	</div>
 </template>
