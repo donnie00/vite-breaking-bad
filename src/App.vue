@@ -18,7 +18,6 @@ export default {
 	<div class="bg-dark">
 		<TheHeader />
 		<div class="container">
-			<CharacterFilter />
 			<TheMain />
 		</div>
 	</div>

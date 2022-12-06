@@ -1,6 +1,7 @@
 <template>
-	<div class="bg-dark">
-		<h1 class="text-light">Game of thrones API</h1>
+	<div class="container bg-dark text-center">
+		<!-- <h1 class="text-light">Rick & Morty characters list</h1>-->
+		<img src="/rick-and-morty-logo.png" alt="" class="img-fluid p-5 w-75" />
 	</div>
 </template>
 

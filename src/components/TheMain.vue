@@ -1,6 +1,6 @@
 <template>
-	<main>
-		<div class="bg-light p-3">
+	<main class="py-3">
+		<div class="bg-secondary p-3 rounded-3">
 			<CharactersList />
 		</div>
 	</main>
