@@ -9,7 +9,7 @@
 				v-model="filters.status"
 				class="form-select text-bg-dark border-dark"
 				aria-label="Default select example ">
-				<option value="all">Status</option>
+				<option value="">Status</option>
 				<option value="alive">Alive</option>
 				<option value="dead">Dead</option>
 				<option value="unknow">Unknown</option>
@@ -18,7 +18,7 @@
 				v-model="filters.species"
 				class="form-select text-bg-dark border-dark"
 				aria-label="Default select example">
-				<option selected value="all">Species</option>
+				<option value="">Species</option>
 				<option value="human">Human</option>
 				<option value="alien">Alien</option>
 				<option value="others">Others</option>
@@ -27,21 +27,24 @@
 				v-model="filters.gender"
 				class="form-select text-bg-dark border-dark"
 				aria-label="Default select example">
-				<option selected value="all" disabled>Gender</option>
+				<option value="">Gender</option>
 				<option value="male">Male</option>
 				<option value="female">Female</option>
 				<option value="genderless">Genderless</option>
 				<option value="unknown">Unknown</option>
 			</select>
-			<button class="btn btn-warning">Reset</button>
-			<button class="btn btn-success">Search</button>
+			<button class="btn btn-warning" @click="resetFilters">Reset</button>
+			<button class="btn btn-success" @click="setFilters">Search</button>
 		</div>
 	</div>
 </template>
 <script>
+import {store, getCharacters} from '../store.js';
+
 export default {
 	data() {
 		return {
+			store,
 			filters: {
 				name: '',
 				status: '',
@@ -49,6 +52,19 @@ export default {
 				gender: '',
 			},
 		};
+	},
+
+	methods: {
+		resetFilters() {
+			Object.keys(this.filters).forEach((prop) => {
+				this.filters[prop] = '';
+			});
+		},
+
+		setFilters() {
+			this.store.filters = {...this.filters};
+			getCharacters();
+		},
 	},
 };
 </script>

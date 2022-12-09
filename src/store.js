@@ -6,16 +6,19 @@ export const store = reactive({
 	currentPage: 1,
 	characterList: [],
 	dataInfo: [],
+	filters: {},
 });
 
 export function getCharacters() {
 	store.loading = true;
 
 	axios
-		.get(
-			'https://rickandmortyapi.com/api/character' +
-				`/?page=${store.currentPage}`
-		)
+		.get('https://rickandmortyapi.com/api/character', {
+			params: {
+				page: store.currentPage,
+				...store.filters,
+			},
+		})
 
 		.then((resp) => {
 			store.characterList = resp.data.results;
