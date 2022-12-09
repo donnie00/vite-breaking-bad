@@ -2,7 +2,9 @@
 	<div>
 		<CharacterListHeader />
 		<div class="d-flex justify-content-center mb-3">
-			<Pagination @changePage="switchPage"></Pagination>
+			<Pagination
+				:currentPage="store.currentPage"
+				@changePage="switchPage"></Pagination>
 		</div>
 
 		<div class="card-container mb-3">
@@ -43,7 +45,6 @@ export default {
 
 	methods: {
 		switchPage(pageNumber) {
-			console.log('ascoltato click emit');
 			this.store.currentPage = pageNumber;
 			getCharacters();
 		},
