@@ -9,6 +9,9 @@
 				<p class="card-text">
 					{{ character.species }}, {{ character.gender }}
 				</p>
+				<small class="text-muted" v-if="character.type !== ''">
+					{{ `(${character.type})` }}
+				</small>
 			</div>
 			<div class="card-footer border-secondary">
 				<small class="text-muted">Status: {{ character.status }}</small>
@@ -19,6 +22,14 @@
 <script>
 export default {
 	props: {
+		/**
+		 * @property {number} id
+		 * @property {String} name
+		 * @property {String} species
+		 * @property {String} gender
+		 * @property {String} status
+		 * @property {String} type
+		 */
 		character: {
 			type: Object,
 			required: true,

@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export const store = reactive({
 	loading: false,
+	currentPage: 1,
 	characterList: [],
 	dataInfo: [],
 });
@@ -11,14 +12,16 @@ export function getCharacters() {
 	store.loading = true;
 
 	axios
-		.get('https://rickandmortyapi.com/api/character')
+		.get(
+			'https://rickandmortyapi.com/api/character' +
+				`/?page=${store.currentPage}`
+		)
+
 		.then((resp) => {
 			store.characterList = resp.data.results;
 			store.dataInfo = resp.data.info;
 
-			setTimeout(() => {
-				store.loading = false;
-			}, 1000);
+			store.loading = false;
 		})
 
 		.catch((error) => {
