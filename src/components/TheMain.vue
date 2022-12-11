@@ -1,7 +1,7 @@
 <template>
 	<main class="py-3">
 		<div class="bg-secondary p-3 rounded-3">
-			<CharactersList />
+			<CharactersList v-cloak />
 		</div>
 	</main>
 </template>
@@ -11,4 +11,8 @@ export default {
 	components: {CharactersList},
 };
 </script>
-<style lang=""></style>
+<style lang="scss">
+[v-cloak] {
+	display: none;
+}
+</style>

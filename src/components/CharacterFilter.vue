@@ -21,7 +21,6 @@
 				<option value="">Species</option>
 				<option value="human">Human</option>
 				<option value="alien">Alien</option>
-				<option value="others">Others</option>
 			</select>
 			<select
 				v-model="filters.gender"
